@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ToDo List application</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+body,table,div,h3
+{
+    font-family: "Ubuntu", Helvetica, Arial, sans-serif!important;
+}
+</style>
+
+<body>
+
+<div class="jumbotron">
+      <div class="container">
+        <h1>To-Do List App</h1>
+        <p>Enter your tasks ,select priority and press enter.Press delete to remove tasks.</p>
+      </div>
+    </div>
+
+<div class="row">
+<div class="col-xs-6 col-sm-4"></div>
+  <div class="col-xs-6 col-sm-4">
+  <div style="margin-top:13%" class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title"><b>To Do List</b></h3>
+	  </div>
+  <div class="panel-body">
+	<div ng-app="todoApp" ng-controller="toDoCntrlr">
+	<table class="table">
+		<thead>
+		<tr><th>
+			<input type="text" style="border:0px none;" ng-model="newTask" ng-keyup="add()" size=40 placeholder="Add Your Task and Press Enter" 
+			ng-required="true">
+			
+		</th></tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="task in taskList">
+			<td>
+				<span>
+				<input type="checkbox" ng-model="task.checked" >&nbsp;
+				</span>
+			   
+				<span ng-if="task.checked == false"><em>
+				{{task.title}}</em>
+				</span>
+			    
+			    <!-- strike through if check box is checked -->
+				<span ng-if="task.checked == true"><em>
+				<s>{{task.title}}</s></em>
+				</span>
+						
+				<!-- Display priority -->	
+				 <span style="background-color:orange" ng-if="task.priority == 'medium'"><em> 
+				{{task.priority}}</em>
+				</span> &nbsp;
+				
+				<span style="background-color:green" ng-if="task.priority == 'high'"><em> 
+				{{task.priority}}</em>
+				</span> &nbsp;
+			   							
+				<span style="float:right" class="glyphicon glyphicon-remove" title="Delete Task" 
+				ng-click="deleteTask($index)" aria-hidden="true"></span>
+			  </td>
+			 </tr>
+		</tbody>
+	</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- External angular js controller -->
+<script src="js/ToDoController.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
